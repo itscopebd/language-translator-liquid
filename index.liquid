@@ -1,0 +1,28 @@
+{% form 'localization' %}
+    <select name="language_code" id="cars" class="lan-select">
+        {% for language in localization.available_languages %}
+            {% if language.iso_code == localization.language.iso_code %}
+                <option value="{{ language.iso_code }}" selected>{{ language.endonym_name |  capitalize }}</option> 
+                {% else %}
+                <option value="{{ language.iso_code }}">{{ language.endonym_name |  capitalize }}</option>   
+                
+            {% endif %}
+            
+        {% endfor %}
+
+    </select>
+   
+{% endform %}
+
+<script>
+// language translator 
+window.addEventListener("DOMContentLoaded", () => {
+  function languageHandler(e) {
+    e.target.form.submit();
+  }
+  document.querySelectorAll(".lan-select").forEach((elm) => {
+    elm.addEventListener("change", languageHandler);
+  });
+});
+
+</script>
